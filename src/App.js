@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col } from 'reactstrap'
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap'
 
+import { PrintBlocks, PrintCore } from 'components'
+
 import b4a from 'b4a'
 import z32 from 'z32'
 
@@ -138,24 +140,29 @@ function App () {
   }, [encryptionKey])
 
   return (
-    <div className="bg-dark custom-body" style={{ fontSize: '1.2rem' }}>
+    <div className="custom-body body-dark" style={{ fontSize: '1.2rem' }}>
       <Container>
         <br />
 
         <Row>
+          <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+            <h1 style={{ fontSize: '60px,', marginBottom: '20px' }}>
+              HyperFind
+            </h1>
+          </Col>
           <Col xs={10}>
-            <Input type="text" placeholder="Find core by key" onChange={onsearchchange} value={search} />
+            <Input className='custom-input' style={{ borderRadius: 0 }}  type="text" placeholder="Find core by key" onChange={onsearchchange} value={search} />
           </Col>
 
           <Col xs={2}>
-            <Input type="number" placeholder="Write a core index" onChange={onindexchange} value={coreIndex} />
+            <Input type="number" style={{ borderRadius: 0 }} placeholder="Write a core index" onChange={onindexchange} value={coreIndex} />
           </Col>
 
           <br />
           <br />
 
-          <Col xs={10}>
-            <Input type="password" placeholder="Encryption key (optional)" onChange={onencryptionkey} value={encryptionKey} />
+          <Col xs={12}>
+            <Input type="password" style={{ borderRadius: 0 }} placeholder="Encryption key (optional)" onChange={onencryptionkey} value={encryptionKey} />
           </Col>
 
           {/* <Col>
@@ -169,43 +176,6 @@ function App () {
         <PrintBlocks core={core} blocks={blocks} />
       </Container>
     </div>
-  )
-}
-
-function PrintCore ({ core }) {
-  if (!core) return null
-
-  return (
-    <>
-      <span style={{ color: '#8957e5' }}>CORE</span>
-      <br />
-
-      <span style={{ color: '#3fb950' }}>ID</span> <span style={{ color: '#58a6ff' }}>{core.id}</span><br/>
-      <span style={{ color: '#3fb950' }}>Length</span> {core.length}<br/>
-      <span style={{ color: '#3fb950' }}>Peers</span> {core.peers.length}<br />
-      <br />
-    </>
-  )
-}
-
-function PrintBlocks ({ core, blocks }) {
-  if (!core) return null
-
-  return (
-    <>
-      <span style={{ color: '#8957e5' }}>BLOCKS</span>
-      <br />
-
-      {blocks.map(block => {
-        return (
-          <div key={'block-' + block.index}>
-            <span style={{ color: 'yellow' }}>#{block.index}</span>&nbsp;<span style={{ color: '#58a6ff' }}>{block.value}</span>
-            <br />
-          </div>
-        )
-      })}
-      <br />
-    </>
   )
 }
 
