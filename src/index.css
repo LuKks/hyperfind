@@ -80,25 +80,3 @@ body {
 .body-dark .theme-switch {
   color: white;
 }
-
-/* Light Theme */
-
-/* .body-light {
-  color: black;
-  background-color: var(--light-bg);
-}
-
-.body-light .span-title {
-  color: #8957e5;
-}
-
-.body-light .span-section {
-  color: #ff0060;
-}
-.body-light .span-block-section {
-  color: #d3a748;
-}
-
-.body-light .theme-switch {
-  color: black;
-} */

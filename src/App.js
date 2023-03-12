@@ -144,36 +144,15 @@ function App () {
     setCoreOptions(prev => ({ ...prev, encryptionKey: b4a.from(encryptionKey, 'hex') }));
   }, [encryptionKey]);
 
-// Theme swap useEffect and onClick function
-
-  // useEffect(() => {
-  //   if (!darkTheme) {
-  //     setThemeClass('body-light')
-  //     setThemeIcon(faMoon)
-  //   }
-  //   if (darkTheme) {
-  //     setThemeClass('body-dark')
-  //     setThemeIcon(faSun)
-  //   }
-  // }, [darkTheme])
-
-  // function themeOnClick() {
-  //   setDarkTheme(!darkTheme)
-  // }
-
   return (
     <div className={`custom-body ${themeClass}`}>
       <Container>
         <br />
         <Row style={{ justifyContent: 'center' }}>
-          <Col xs={3}/>
-          <Col xs={6} style={{ display: 'flex', justifyContent: 'center' }}>
+          <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
             <h1 style={{ fontSize: '2em,', marginBottom: '20px' }}>
               Hypercore Explorer
             </h1>
-          </Col>
-          <Col>
-            {/* <FontAwesomeIcon onClick={themeOnClick} className='theme-switch' icon={themeIcon} /> */}
           </Col>
           <br/>
           <br/>
