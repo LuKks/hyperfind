@@ -1,19 +1,24 @@
-import { SpanSection, SpanTitle } from 'components/index'
+import { SpanTitle } from 'components/index'
 
-function PrintCore ({ core }) {
+function PrintBlocks ({ core, blocks }) {
   if (!core) return null
 
   return (
     <>
-      <SpanTitle>Core</SpanTitle>
+      <SpanTitle>Blocks</SpanTitle>
       <br />
 
-      <SpanSection>ID</SpanSection> <span style={{ color: '#58a6ff' }}>{core.id}</span><br />
-      <SpanSection>Length</SpanSection> {core.length}<br />
-      <SpanSection>Peers</SpanSection> {core.peers.length}<br />
+      {blocks.map(block => {
+        return (
+          <div key={'block-' + block.index}>
+            <span className='span-block-section'>#{block.index}</span>&nbsp;<span>{block.value}</span>
+            <br />
+          </div>
+        )
+      })}
       <br />
     </>
   )
 }
 
-export default PrintCore
+export default PrintBlocks
