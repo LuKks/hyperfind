@@ -28,6 +28,10 @@ body {
   min-height: 100vh;
 }
 
+.custom-input {
+  border-radius: 0;
+}
+
 .main-container {
   max-width: 960px;
 }

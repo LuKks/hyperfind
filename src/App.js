@@ -144,14 +144,14 @@ function App () {
       <Container>
         <br />
 
-        <Row>
+        <Row style={{ justifyContent: 'center' }}>
           <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
             <h1 style={{ fontSize: '60px,', marginBottom: '20px' }}>
-              HyperFind
+              Hyper Find
             </h1>
           </Col>
-          <Col xs={10}>
-            <Input className='custom-input' style={{ borderRadius: 0 }}  type="text" placeholder="Find core by key" onChange={onsearchchange} value={search} />
+          <Col xs={6}>
+            <Input className='custom-input' style={{ borderRadius: 0 }} type="text" placeholder="Find core by key" onChange={onsearchchange} value={search}/>
           </Col>
 
           <Col xs={2}>
@@ -161,19 +161,23 @@ function App () {
           <br />
           <br />
 
-          <Col xs={12}>
+          <Col xs={8}>
             <Input type="password" style={{ borderRadius: 0 }} placeholder="Encryption key (optional)" onChange={onencryptionkey} value={encryptionKey} />
           </Col>
 
           {/* <Col>
             <Button color="primary" onclick={onclicklookup}>Lookup</Button>
           </Col> */}
+          <br/>
+          <Col xs={8} style={{ marginTop: '10px' }}>
+            <PrintCore core={core} />
+            <PrintBlocks core={core} blocks={blocks} />
+          </Col>
         </Row>
 
         <br />
 
-        <PrintCore core={core} />
-        <PrintBlocks core={core} blocks={blocks} />
+        {/* <PrintBlocks core={core} blocks={blocks} /> */}
       </Container>
     </div>
   )
