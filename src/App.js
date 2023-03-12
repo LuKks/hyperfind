@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'reactstrap';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
-import { PrintBlocks, PrintCore } from 'components';
+import { PrintBlocks, PrintCore, CustomInput } from 'components';
 
 import b4a from 'b4a';
 import z32 from 'z32';
@@ -14,6 +13,8 @@ import useSwarm from 'hooks/useSwarm.js';
 import useCore from 'hooks/useCore.js';
 
 import RAM from 'random-access-memory';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 function App () {
   const [dht] = useDHT();
@@ -28,6 +29,7 @@ function App () {
 
   const [darkTheme, setDarkTheme] = useState(true);
   const [themeClass, setThemeClass] = useState('body-dark')
+  const [themeIcon, setThemeIcon] = useState(faSun)
 
   const [core, coreOptions, setCoreOptions] = useCore(RAM, lookup);
 
@@ -142,45 +144,55 @@ function App () {
     setCoreOptions(prev => ({ ...prev, encryptionKey: b4a.from(encryptionKey, 'hex') }));
   }, [encryptionKey]);
 
-  useEffect(() => {
-    if (!darkTheme) setThemeClass('body-light')
-    if (darkTheme) setThemeClass('body-dark')
-  }, [darkTheme])
+// Theme swap useEffect and onClick function
 
-  function themeOnClick() {
-    setDarkTheme(!darkTheme)
-  }
+  // useEffect(() => {
+  //   if (!darkTheme) {
+  //     setThemeClass('body-light')
+  //     setThemeIcon(faMoon)
+  //   }
+  //   if (darkTheme) {
+  //     setThemeClass('body-dark')
+  //     setThemeIcon(faSun)
+  //   }
+  // }, [darkTheme])
+
+  // function themeOnClick() {
+  //   setDarkTheme(!darkTheme)
+  // }
 
   return (
     <div className={`custom-body ${themeClass}`}>
       <Container>
         <br />
-
         <Row style={{ justifyContent: 'center' }}>
-          <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+          <Col xs={3}/>
+          <Col xs={6} style={{ display: 'flex', justifyContent: 'center' }}>
             <h1 style={{ fontSize: '2em,', marginBottom: '20px' }}>
-              Hyper Find
+              Hypercore Explorer
             </h1>
           </Col>
+          <Col>
+            {/* <FontAwesomeIcon onClick={themeOnClick} className='theme-switch' icon={themeIcon} /> */}
+          </Col>
+          <br/>
+          <br/>
           <Col xs={6}>
-            <Input className='custom-input' type="text" placeholder="Find core by key" onChange={onsearchchange} value={search}/>
+            <CustomInput type="text" placeholder="Find core by key" onChange={onsearchchange} value={search}/>
           </Col>
 
           <Col xs={2}>
-            <Input className='custom-input' type="number"  placeholder="Write a core index" onChange={onindexchange} value={coreIndex} />
+            <CustomInput type="number"  placeholder="Write a core index" onChange={onindexchange} value={coreIndex} />
           </Col>
 
           <br />
           <br />
 
           <Col xs={8}>
-            <Input className='custom-input' type="password"  placeholder="Encryption key (optional)" onChange={onencryptionkey} value={encryptionKey} />
+            <CustomInput type="password"  placeholder="Encryption key (optional)" onChange={onencryptionkey} value={encryptionKey} />
           </Col>
           <br/>
           <br/>
-          <Col xs={1}>
-            <Button onClick={themeOnClick}>Theme</Button>
-          </Col>
 
           {/* <Col>
             <Button color="primary" onclick={onclicklookup}>Lookup</Button>
