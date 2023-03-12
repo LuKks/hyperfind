@@ -13,8 +13,6 @@ import useSwarm from 'use-hyper/swarm';
 import useCore from 'use-hyper/core';
 
 import RAM from 'random-access-memory';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 function App () {
   const [dht] = useDHT();
@@ -26,10 +24,6 @@ function App () {
   const [coreIndex, setCoreIndex] = useState(0);
 
   const [blocks, setBlocks] = useState([]);
-
-  const [darkTheme, setDarkTheme] = useState(true);
-  const [themeClass, setThemeClass] = useState('body-dark')
-  const [themeIcon, setThemeIcon] = useState(faSun)
 
   const [core, coreOptions, setCoreOptions] = useCore(RAM, lookup);
 
@@ -145,7 +139,7 @@ function App () {
   }, [encryptionKey]);
 
   return (
-    <div className={`custom-body ${themeClass}`}>
+    <div className={`custom-body body-dark`}>
       <Container>
         <br />
         <Row style={{ justifyContent: 'center' }}>
