@@ -1,4 +1,4 @@
-import { SpanSection, SpanTitle } from 'components/index'
+import { SpanTitle } from 'components/index'
 
 function PrintBlocks ({ core, blocks }) {
     if (!core) return null
