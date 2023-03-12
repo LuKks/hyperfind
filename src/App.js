@@ -145,10 +145,6 @@ function App () {
   useEffect(() => {
     if (!darkTheme) setThemeClass('body-light')
     if (darkTheme) setThemeClass('body-dark')
-
-    return () => {
-      cleanup()
-    }
   }, [darkTheme])
 
   function themeOnClick() {
