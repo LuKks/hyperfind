@@ -9,9 +9,9 @@ import { PrintBlocks, PrintCore } from 'components';
 import b4a from 'b4a';
 import z32 from 'z32';
 
-import useDHT from 'hooks/use-dht.js';
-import useSwarm from 'hooks/use-swarm.js';
-import useCore from 'hooks/use-core.js';
+import useDHT from 'hooks/useDHT.js';
+import useSwarm from 'hooks/useSwarm.js';
+import useCore from 'hooks/useCore.js';
 
 import RAM from 'random-access-memory';
 import { cleanup } from '@testing-library/react';
