@@ -32,8 +32,8 @@ export default function useDHT () {
   return [dht]
 }
 
-function randomBytes (n) {
-  const buf = b4a.allocUnsafe(n)
+function randomBytes (bytesSize) {
+  const buf = b4a.allocUnsafe(bytesSize)
   sodium.randombytes_buf(buf)
   return buf
 }
