@@ -25,7 +25,7 @@ function App () {
 
   const [blocks, setBlocks] = useState([])
 
-  const [core, coreOptions, setCoreOptions] = useCore(RAM, lookup)
+  const [core, , setCoreOptions] = useCore(RAM, lookup)
 
   useEffect(() => {
     console.log('search', search)
