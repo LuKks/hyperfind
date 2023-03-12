@@ -20,13 +20,15 @@
     "react-scripts": "5.0.1",
     "reactstrap": "^9.1.5",
     "sodium-universal": "^4.0.0",
+    "use-hyper": "^0.0.1",
     "web-vitals": "^2.1.4",
     "z32": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "test": "standard"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "standard": "^17.0.0"
   }
 }

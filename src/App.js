@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col } from 'reactstrap'
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap'
+
+import { PrintBlocks, PrintCore, CustomInput } from 'components'
 
 import b4a from 'b4a'
 import z32 from 'z32'
 
-import useDHT from 'hooks/use-dht.js'
-import useSwarm from 'hooks/use-swarm.js'
-import useCore from 'hooks/use-core.js'
+import useDHT from 'use-hyper/dht'
+import useSwarm from 'use-hyper/swarm'
+import useCore from 'use-hyper/core'
 
 import RAM from 'random-access-memory'
 
@@ -24,7 +25,7 @@ function App () {
 
   const [blocks, setBlocks] = useState([])
 
-  const [core, coreOptions, setCoreOptions] = useCore(RAM, lookup)
+  const [core, , setCoreOptions] = useCore(RAM, lookup)
 
   useEffect(() => {
     console.log('search', search)
@@ -138,74 +139,49 @@ function App () {
   }, [encryptionKey])
 
   return (
-    <div className="bg-dark custom-body" style={{ fontSize: '1.2rem' }}>
+    <div className='custom-body body-dark'>
       <Container>
         <br />
-
-        <Row>
-          <Col xs={10}>
-            <Input type="text" placeholder="Find core by key" onChange={onsearchchange} value={search} />
+        <Row style={{ justifyContent: 'center' }}>
+          <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+            <h1 style={{ fontSize: '2em,', marginBottom: '20px' }}>
+              Hypercore Explorer
+            </h1>
+          </Col>
+          <br />
+          <br />
+          <Col xs={6}>
+            <CustomInput type='text' placeholder='Find core by key' onChange={onsearchchange} value={search} />
           </Col>
 
           <Col xs={2}>
-            <Input type="number" placeholder="Write a core index" onChange={onindexchange} value={coreIndex} />
+            <CustomInput type='number' placeholder='Write a core index' onChange={onindexchange} value={coreIndex} />
           </Col>
 
           <br />
           <br />
 
-          <Col xs={10}>
-            <Input type="password" placeholder="Encryption key (optional)" onChange={onencryptionkey} value={encryptionKey} />
+          <Col xs={8}>
+            <CustomInput type='password' placeholder='Encryption key (optional)' onChange={onencryptionkey} value={encryptionKey} />
           </Col>
+          <br />
+          <br />
 
           {/* <Col>
             <Button color="primary" onclick={onclicklookup}>Lookup</Button>
           </Col> */}
+          <br />
+          <Col xs={8} style={{ marginTop: '10px' }}>
+            <PrintCore core={core} />
+            <PrintBlocks core={core} blocks={blocks} />
+          </Col>
         </Row>
 
         <br />
 
-        <PrintCore core={core} />
-        <PrintBlocks core={core} blocks={blocks} />
+        {/* <PrintBlocks core={core} blocks={blocks} /> */}
       </Container>
     </div>
-  )
-}
-
-function PrintCore ({ core }) {
-  if (!core) return null
-
-  return (
-    <>
-      <span style={{ color: '#8957e5' }}>CORE</span>
-      <br />
-
-      <span style={{ color: '#3fb950' }}>ID</span> <span style={{ color: '#58a6ff' }}>{core.id}</span><br/>
-      <span style={{ color: '#3fb950' }}>Length</span> {core.length}<br/>
-      <span style={{ color: '#3fb950' }}>Peers</span> {core.peers.length}<br />
-      <br />
-    </>
-  )
-}
-
-function PrintBlocks ({ core, blocks }) {
-  if (!core) return null
-
-  return (
-    <>
-      <span style={{ color: '#8957e5' }}>BLOCKS</span>
-      <br />
-
-      {blocks.map(block => {
-        return (
-          <div key={'block-' + block.index}>
-            <span style={{ color: 'yellow' }}>#{block.index}</span>&nbsp;<span style={{ color: '#58a6ff' }}>{block.value}</span>
-            <br />
-          </div>
-        )
-      })}
-      <br />
-    </>
   )
 }
 
