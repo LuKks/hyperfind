@@ -1,6 +1,6 @@
-import { Input } from "reactstrap"
+import { Input } from 'reactstrap'
 
-function CustomInput(props) {
+function CustomInput (props) {
   return (
     <Input className='custom-input' {...props}>{props.children}</Input>
   )
