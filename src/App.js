@@ -14,7 +14,6 @@ import useSwarm from 'hooks/useSwarm.js';
 import useCore from 'hooks/useCore.js';
 
 import RAM from 'random-access-memory';
-import { cleanup } from '@testing-library/react';
 
 function App () {
   const [dht] = useDHT();
