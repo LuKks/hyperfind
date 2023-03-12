@@ -8,9 +8,9 @@ import { PrintBlocks, PrintCore, CustomInput } from 'components';
 import b4a from 'b4a';
 import z32 from 'z32';
 
-import useDHT from 'hooks/useDHT.js';
-import useSwarm from 'hooks/useSwarm.js';
-import useCore from 'hooks/useCore.js';
+import useDHT from 'use-hyper/dht';
+import useSwarm from 'use-hyper/swarm';
+import useCore from 'use-hyper/core';
 
 import RAM from 'random-access-memory';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
