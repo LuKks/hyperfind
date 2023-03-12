@@ -20,7 +20,8 @@ body {
   font-family: 'IBM Plex Mono', monospace;
   margin: 0;
   padding: 0;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 1.2rem;
   /* background-color: #282c34; */
   /* display: flex;
   justify-content: center;
@@ -28,7 +29,8 @@ body {
   min-height: 100vh;
 }
 
-.custom-input {
+.custom-body .custom-input {
+  border: 3px solid black;
   border-radius: 0;
 }
 
@@ -44,12 +46,12 @@ body {
 }
 
 .body-dark .span-title {
-  color: #8957e5
+  color: #8957e5;
 }
 
 .body-dark .span-section {
   /* color: #3fb950 */
-  color: #68ff00;
+  color: #ff0060;
 }
 
 .body-dark .span-block-section {
@@ -63,18 +65,19 @@ body {
   background-color: white;
 }
 
+/* .body-light input {
+  border: 3px solid black;
+  border-radius: 0;
+} */
+
 .body-light .span-title {
-  color: #ff0060
+  color: #8957e5;
 }
 
 .body-light .span-section {
   /* color: #3fb950 */
-  color: #4aa110;
+  color: #ff0060;
 }
 .body-light .span-block-section {
   color: #d3a748;
-}
-
-.form-control {
-  border-radius: 0%;
 }

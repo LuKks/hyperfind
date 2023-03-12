@@ -1,4 +1,4 @@
-import { SpanSection, SpanTitle } from './index'
+import { SpanSection, SpanTitle } from 'components/index'
 
 function PrintBlocks ({ core, blocks }) {
     if (!core) return null
@@ -11,7 +11,7 @@ function PrintBlocks ({ core, blocks }) {
         {blocks.map(block => {
           return (
             <div key={'block-' + block.index}>
-              <span className='span-block-section'>#{block.index}</span>&nbsp;<span style={{ color: '#58a6ff' }}>{block.value}</span>
+              <span className='span-block-section'>#{block.index}</span>&nbsp;<span>{block.value}</span>
               <br />
             </div>
           )

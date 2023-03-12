@@ -1,4 +1,4 @@
-import { SpanSection, SpanTitle } from './index'
+import { SpanSection, SpanTitle } from 'components/index'
 
 function PrintCore ({ core }) {
     if (!core) return null
