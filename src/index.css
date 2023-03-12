@@ -28,6 +28,10 @@ body {
   min-height: 100vh;
 }
 
+.main-container {
+  max-width: 960px;
+}
+
 /* Dark Theme */
 
 .body-dark {
