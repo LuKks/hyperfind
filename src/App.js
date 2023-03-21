@@ -5,8 +5,9 @@ import { Container, Row, Col } from 'reactstrap'
 
 import { PrintBlocks, PrintCore, CustomInput } from 'components'
 
+import { useLookup, useEncryptionKey } from 'hooks'
+
 import b4a from 'b4a'
-import z32 from 'z32'
 
 import useDHT from 'use-hyper/dht'
 import useSwarm from 'use-hyper/swarm'
@@ -18,32 +19,15 @@ function App () {
   const [dht] = useDHT()
   const [swarm] = useSwarm(dht)
 
-  const [search, setSearch] = useState('')
-  const [lookup, setLookup] = useState(null)
-  const [encryptionKey, setEncryptionKey] = useState('')
+  const [search, setSearch, lookup] = useLookup('')
+
   const [coreIndex, setCoreIndex] = useState(0)
 
   const [blocks, setBlocks] = useState([])
 
   const [core, , setCoreOptions] = useCore(RAM, lookup)
 
-  useEffect(() => {
-    console.log('search', search)
-
-    // + use hypercore-id-encoding
-
-    if (search.length === 52) {
-      try {
-        setLookup(z32.decode(search))
-        return
-      } catch {}
-    } else if (search.length === 64) {
-      setLookup(b4a.from(search, 'hex'))
-      return
-    }
-
-    setLookup(null)
-  }, [search])
+  const [encryptionKey, setEncryptionKey] = useEncryptionKey('', setCoreOptions)
 
   useEffect(() => {
     console.log('lookup', lookup)
@@ -128,15 +112,6 @@ function App () {
   function onencryptionkey (e) {
     setEncryptionKey(e.target.value)
   }
-
-  useEffect(() => {
-    if (!encryptionKey || encryptionKey.length !== 64) {
-      setCoreOptions(prev => ({ ...prev, encryptionKey: null }))
-      return
-    }
-    // + z32
-    setCoreOptions(prev => ({ ...prev, encryptionKey: b4a.from(encryptionKey, 'hex') }))
-  }, [encryptionKey])
 
   return (
     <div className='custom-body body-dark'>
