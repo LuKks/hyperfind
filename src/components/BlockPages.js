@@ -7,7 +7,6 @@ import { Button } from 'reactstrap'
 import b4a from 'b4a'
 
 function BlockPages ({ core, lookup, coreUpdated }) {
-  // if (!core) return null
   const [blocks, setBlocks] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [blockPerPage] = useState(10)
