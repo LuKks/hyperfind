@@ -15,13 +15,11 @@ function BlockPages ({ core, lookup, coreUpdated }) {
 
   const indexOfLastBlock = currentPage * blockPerPage
   const indexOfFirstBlock = indexOfLastBlock - blockPerPage
-  // const currentBlocks = blocks.slice(indexOfFirstBlock, indexOfLastBlock)
 
   useEffect(() => {
     console.log('block pages core length', core ? core.length : null)
 
     if (!lookup || core === null) {
-      // console.log('can not download yet')
       setBlocks([])
       return
     }
@@ -34,8 +32,6 @@ function BlockPages ({ core, lookup, coreUpdated }) {
 
     async function main () {
       try {
-        // await core.update({ wait: true })
-
         setMaxPages(Math.ceil(core.length / blockPerPage))
         console.log('maxPages', maxPages, core.length / blockPerPage)
 
@@ -94,6 +90,7 @@ function BlockPages ({ core, lookup, coreUpdated }) {
               )
             }))
         : (<div>Loading...</div>)}
+
       <div style={{ marginTop: '10px' }}>
         <Button onClick={onPrevPage} style={{ marginLeft: '2px', marginRight: '2px', borderRadius: 0, background: '#2e3344' }}>&#8249;Prev</Button>
         <Button onClick={onNextPage} style={{ marginLeft: '2px', marginRight: '2px', borderRadius: 0, background: '#2e3344' }}>Next&#8250;</Button>
