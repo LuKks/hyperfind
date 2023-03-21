@@ -72,8 +72,6 @@ function BlockPages ({ core, lookup, coreUpdated }) {
   }
   if (!core) return null
 
-  console.log('BlockPages core length', core.length)
-
   return (
     <>
       <SpanTitle>Blocks</SpanTitle>
