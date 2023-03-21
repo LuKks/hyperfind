@@ -35,7 +35,6 @@ function App () {
   }, [core])
 
   useEffect(() => {
-    console.log('lookup', lookup)
     if (!dht || !lookup || !core) return
     // + this part should be locked, to make the cleanup is safe
 
@@ -46,7 +45,6 @@ function App () {
     swarm.flush().then(done, done)
 
     function onsocket (socket) {
-      console.log('new replicator')
       core.replicate(socket)
     }
 
@@ -55,7 +53,6 @@ function App () {
     }
 
     return () => {
-      console.log('cleaning replicator')
       swarm.off('connection', onsocket)
       swarm.leave(core.discoveryKey)
     }

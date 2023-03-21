@@ -7,8 +7,6 @@ function useLookup (searchValue = '') {
   const [search, setSearch] = useState(searchValue)
 
   useEffect(() => {
-    console.log('search', search)
-
     // + use hypercore-id-encoding
 
     if (search.length === 52) {

@@ -17,8 +17,6 @@ function BlockPages ({ core, lookup, coreUpdated }) {
   const indexOfFirstBlock = indexOfLastBlock - blockPerPage
 
   useEffect(() => {
-    console.log('block pages core length', core ? core.length : null)
-
     if (!lookup || core === null) {
       setBlocks([])
       return
@@ -33,13 +31,12 @@ function BlockPages ({ core, lookup, coreUpdated }) {
     async function main () {
       try {
         setMaxPages(Math.ceil(core.length / blockPerPage))
-        console.log('maxPages', maxPages, core.length / blockPerPage)
 
         const max = Math.min(indexOfFirstBlock + blockPerPage, core.length)
 
         for (let i = indexOfFirstBlock; i < max; i++) {
           const value = await core.get(i, { timeout: 15000 })
-          if (cleanup) return console.log('block pages stop due cleanup')
+          if (cleanup) return
 
           const first = i === indexOfFirstBlock
           if (first && !value) return
@@ -56,7 +53,6 @@ function BlockPages ({ core, lookup, coreUpdated }) {
     }
 
     return () => {
-      console.log('block pages cleanup')
       cleanup = true
     }
   }, [lookup, core, currentPage, coreUpdated])
