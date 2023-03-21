@@ -34,7 +34,6 @@ function App () {
     return () => core.off('append', onappend)
   }, [core])
 
-
   useEffect(() => {
     console.log('lookup', lookup)
     if (!dht || !lookup || !core) return
