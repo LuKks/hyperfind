@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 
+import Logo from 'images/196x196.png'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col } from 'reactstrap'
 
-import { PrintBlocks, PrintCore, CustomInput } from 'components'
+import { BlockPages, PrintCore, CustomInput } from 'components'
 
-import b4a from 'b4a'
-import z32 from 'z32'
+import { useLookup, useEncryptionKey } from 'hooks'
 
 import useDHT from 'use-hyper/dht'
 import useSwarm from 'use-hyper/swarm'
@@ -18,32 +19,21 @@ function App () {
   const [dht] = useDHT()
   const [swarm] = useSwarm(dht)
 
-  const [search, setSearch] = useState('')
-  const [lookup, setLookup] = useState(null)
-  const [encryptionKey, setEncryptionKey] = useState('')
-  const [coreIndex, setCoreIndex] = useState(0)
-
-  const [blocks, setBlocks] = useState([])
+  const [search, setSearch, lookup] = useLookup('')
 
   const [core, , setCoreOptions] = useCore(RAM, lookup)
 
+  const [encryptionKey, setEncryptionKey] = useEncryptionKey('', setCoreOptions)
+
+  const [coreUpdated, setCoreUpdated] = useState(0)
+
   useEffect(() => {
-    console.log('search', search)
+    if (core === null) return
+    const onappend = () => setCoreUpdated(updated => updated + 1)
+    core.on('append', onappend)
+    return () => core.off('append', onappend)
+  }, [core])
 
-    // + use hypercore-id-encoding
-
-    if (search.length === 52) {
-      try {
-        setLookup(z32.decode(search))
-        return
-      } catch {}
-    } else if (search.length === 64) {
-      setLookup(b4a.from(search, 'hex'))
-      return
-    }
-
-    setLookup(null)
-  }, [search])
 
   useEffect(() => {
     console.log('lookup', lookup)
@@ -74,51 +64,6 @@ function App () {
 
   //
 
-  function onindexchange (e) {
-    const index = Number(e.target.value)
-    if (isNaN(index)) return
-
-    setCoreIndex(index)
-  }
-
-  useEffect(() => {
-    if (!lookup || core === null) {
-      console.log('can not download yet')
-      setBlocks([])
-      return
-    }
-
-    console.log('start downloads')
-
-    setBlocks([])
-
-    main()
-
-    async function main () {
-      try {
-        await core.update({ wait: true })
-
-        const max = Math.min(coreIndex + 1, core.length)
-
-        for (let i = coreIndex; i < max; i++) {
-          console.log('getting', i)
-          const value = await core.get(i, { timeout: 15000 })
-
-          const first = i === coreIndex
-          if (first && !value) return
-          if (!value) break
-
-          const block = { index: i, value: b4a.toString(value) }
-          setBlocks(prev => first ? [block] : [...prev, block])
-        }
-
-        return
-      } catch {}
-
-      setBlocks([])
-    }
-  }, [lookup, core, coreIndex])
-
   function onsearchchange (e) {
     setSearch(e.target.value)
   }
@@ -129,33 +74,23 @@ function App () {
     setEncryptionKey(e.target.value)
   }
 
-  useEffect(() => {
-    if (!encryptionKey || encryptionKey.length !== 64) {
-      setCoreOptions(prev => ({ ...prev, encryptionKey: null }))
-      return
-    }
-    // + z32
-    setCoreOptions(prev => ({ ...prev, encryptionKey: b4a.from(encryptionKey, 'hex') }))
-  }, [encryptionKey])
-
   return (
     <div className='custom-body body-dark'>
       <Container>
         <br />
         <Row style={{ justifyContent: 'center' }}>
           <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <h1 style={{ fontSize: '2em,', marginBottom: '20px' }}>
+            <img src={Logo} alt='Hypercore Explorer Logo' width={70} />
+          </Col>
+          <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+            <h1 style={{ fontSize: '2em,', marginBottom: '20px', marginTop: '20px' }}>
               Hypercore Explorer
             </h1>
           </Col>
           <br />
           <br />
-          <Col xs={6}>
+          <Col xs={8}>
             <CustomInput type='text' placeholder='Find core by key' onChange={onsearchchange} value={search} />
-          </Col>
-
-          <Col xs={2}>
-            <CustomInput type='number' placeholder='Write a core index' onChange={onindexchange} value={coreIndex} />
           </Col>
 
           <br />
@@ -173,7 +108,8 @@ function App () {
           <br />
           <Col xs={8} style={{ marginTop: '10px' }}>
             <PrintCore core={core} />
-            <PrintBlocks core={core} blocks={blocks} />
+            {/* <PrintBlocks core={core} blocks={blocks} /> */}
+            <BlockPages core={core} lookup={lookup} coreUpdated={coreUpdated} />
           </Col>
         </Row>
 
