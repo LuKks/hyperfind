@@ -6,8 +6,7 @@ import { Button } from 'reactstrap'
 
 import b4a from 'b4a'
 
-function BlockPages({ core, lookup, coreUpdated}) {
-  // if (!core) return null
+function BlockPages ({ core, lookup, coreUpdated }) {
   const [blocks, setBlocks] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [blockPerPage] = useState(10)
@@ -15,13 +14,9 @@ function BlockPages({ core, lookup, coreUpdated}) {
 
   const indexOfLastBlock = currentPage * blockPerPage
   const indexOfFirstBlock = indexOfLastBlock - blockPerPage
-  // const currentBlocks = blocks.slice(indexOfFirstBlock, indexOfLastBlock)
 
   useEffect(() => {
-    console.log('block pages core length', core ? core.length : null)
-
     if (!lookup || core === null) {
-      // console.log('can not download yet')
       setBlocks([])
       return
     }
@@ -34,17 +29,13 @@ function BlockPages({ core, lookup, coreUpdated}) {
 
     async function main () {
       try {
-        // await core.update({ wait: true })
-
         setMaxPages(Math.ceil(core.length / blockPerPage))
-        console.log('maxPages',maxPages, core.length / blockPerPage);
 
         const max = Math.min(indexOfFirstBlock + blockPerPage, core.length)
 
         for (let i = indexOfFirstBlock; i < max; i++) {
-          // console.log('getting', i)
           const value = await core.get(i, { timeout: 15000 })
-          if (cleanup) return console.log('block pages stop due cleanup')
+          if (cleanup) return
 
           const first = i === indexOfFirstBlock
           if (first && !value) return
@@ -61,47 +52,43 @@ function BlockPages({ core, lookup, coreUpdated}) {
     }
 
     return () => {
-      console.log('block pages cleanup')
       cleanup = true
     }
   }, [lookup, core, currentPage, coreUpdated])
 
-  // console.log('maxPages', maxPages)
-
-  function onNextPage() {
+  function onNextPage () {
     if (currentPage >= maxPages) return
     setCurrentPage(currentPage + 1)
   }
 
-  function onPrevPage() {
+  function onPrevPage () {
     if (currentPage <= 1) return
     setCurrentPage(currentPage - 1)
   }
   if (!core) return null
 
-  console.log('BlockPages core length', core.length)
-    
   return (
     <>
       <SpanTitle>Blocks</SpanTitle>
       <br />
 
-      {blocks.length > 0 ? (
-        blocks.map(block => {
-          return (
-            <div key={'block-' + block.index} >
-              <span className='span-block-section'>#{block.index}</span>&nbsp;<span>{block.value}</span>
-              <br />
-            </div>
-          )
-        })) : 
-      (<div>Loading...</div>)
-      }
-      <div style={{ marginTop:"10px" }}>
-        <Button onClick={onPrevPage} style={{ marginLeft:"2px", marginRight:"2px", borderRadius:0, background:"#2e3344" }}>&#8249;Prev</Button>
-        <Button onClick={onNextPage} style={{ marginLeft:"2px", marginRight:"2px", borderRadius:0, background:"#2e3344" }}>Next&#8250;</Button>
+      {blocks.length > 0
+        ? (
+            blocks.map(block => {
+              return (
+                <div key={'block-' + block.index}>
+                  <span className='span-block-section'>#{block.index}</span>&nbsp;<span>{block.value}</span>
+                  <br />
+                </div>
+              )
+            }))
+        : (<div>Loading...</div>)}
+
+      <div style={{ marginTop: '10px' }}>
+        <Button onClick={onPrevPage} style={{ marginLeft: '2px', marginRight: '2px', borderRadius: 0, background: '#2e3344' }}>&#8249;Prev</Button>
+        <Button onClick={onNextPage} style={{ marginLeft: '2px', marginRight: '2px', borderRadius: 0, background: '#2e3344' }}>Next&#8250;</Button>
       </div>
-      
+
       <br />
     </>
   )

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import b4a from 'b4a'
 
-function useEncryptionKey(encryptionKeyValue,setCoreOptions) {
+function useEncryptionKey (encryptionKeyValue, setCoreOptions) {
   const [encryptionKey, setEncryptionKey] = useState(encryptionKeyValue)
 
   useEffect(() => {

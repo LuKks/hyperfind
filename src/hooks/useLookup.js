@@ -2,13 +2,11 @@ import { useState, useEffect } from 'react'
 import b4a from 'b4a'
 import z32 from 'z32'
 
-function useLookup(searchValue = '') {
+function useLookup (searchValue = '') {
   const [lookup, setLookup] = useState(null)
   const [search, setSearch] = useState(searchValue)
 
   useEffect(() => {
-    console.log('search', search)
-
     // + use hypercore-id-encoding
 
     if (search.length === 52) {
