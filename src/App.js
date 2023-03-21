@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 
+import Logo from 'images/196x196.png'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col } from 'reactstrap'
 
@@ -78,7 +80,10 @@ function App () {
         <br />
         <Row style={{ justifyContent: 'center' }}>
           <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <h1 style={{ fontSize: '2em,', marginBottom: '20px' }}>
+            <img src={Logo} alt='Hypercore Explorer Logo' width={70} />
+          </Col>
+          <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+            <h1 style={{ fontSize: '2em,', marginBottom: '20px', marginTop: '20px' }}>
               Hypercore Explorer
             </h1>
           </Col>

@@ -2,6 +2,8 @@ import { SpanTitle } from 'components'
 
 import { useState, useEffect } from 'react'
 
+import { Button } from 'reactstrap'
+
 import b4a from 'b4a'
 
 function BlockPages({ core, lookup, coreUpdated}) {
@@ -95,10 +97,11 @@ function BlockPages({ core, lookup, coreUpdated}) {
         })) : 
       (<div>Loading...</div>)
       }
-
-      <button onClick={onPrevPage} >{"<"}</button>
-      <button onClick={onNextPage} >{">"}</button>
-
+      <div style={{ marginTop:"10px" }}>
+        <Button onClick={onPrevPage} style={{ marginLeft:"2px", marginRight:"2px", borderRadius:0, background:"#2e3344" }}>&#8249;Prev</Button>
+        <Button onClick={onNextPage} style={{ marginLeft:"2px", marginRight:"2px", borderRadius:0, background:"#2e3344" }}>Next&#8250;</Button>
+      </div>
+      
       <br />
     </>
   )
