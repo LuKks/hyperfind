@@ -89,7 +89,7 @@ function BlockPages({ core, lookup, coreUpdated}) {
       {blocks.length > 0 ? (
         blocks.map(block => {
           return (
-            <div key={'block-' + block.index} style={{ whiteSpace: 'pre-wrap', overflowWrap: 'break-word' }}>
+            <div key={'block-' + block.index} >
               <span className='span-block-section'>#{block.index}</span>&nbsp;<span>{block.value}</span>
               <br />
             </div>
