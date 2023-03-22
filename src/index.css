@@ -46,6 +46,10 @@ body {
   color: rgb(119, 119, 119);
 }
 
+.custom-body span {
+  overflow-wrap: anywhere;
+}
+
 .main-container {
   max-width: 960px;
 }
