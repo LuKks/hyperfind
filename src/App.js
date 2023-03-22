@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import Logo from 'images/196x196.png'
 
@@ -52,7 +52,7 @@ function App () {
       swarm.off('connection', onsocket)
       swarm.leave(core.discoveryKey)
 
-      swarm.destroy()
+      swarm.destroy().catch(noop) // Run on background
       for (const socket of swarm.connections) socket.destroy()
     }
   }, [dht, hyperswarm, lookup, coreOpened, coreClosed]) // Note: it's not passing in "core"
