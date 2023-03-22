@@ -1,12 +1,9 @@
-import { SpanTitle } from 'components'
-
 import { useState, useEffect } from 'react'
-
 import { Button } from 'reactstrap'
-
+import { SpanTitle } from 'components'
 import b4a from 'b4a'
 
-function BlockPages ({ core, lookup, coreUpdated }) {
+function BlockPages ({ core, lookup, coreAppend }) {
   const [blocks, setBlocks] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [blockPerPage] = useState(10)
@@ -34,6 +31,7 @@ function BlockPages ({ core, lookup, coreUpdated }) {
         const max = Math.min(indexOfFirstBlock + blockPerPage, core.length)
 
         for (let i = indexOfFirstBlock; i < max; i++) {
+          // + prefetch next
           const value = await core.get(i, { timeout: 15000 })
           if (cleanup) return
 
@@ -54,7 +52,7 @@ function BlockPages ({ core, lookup, coreUpdated }) {
     return () => {
       cleanup = true
     }
-  }, [lookup, core, currentPage, coreUpdated])
+  }, [lookup, core, currentPage, coreAppend])
 
   function onNextPage () {
     if (currentPage >= maxPages) return
@@ -65,7 +63,8 @@ function BlockPages ({ core, lookup, coreUpdated }) {
     if (currentPage <= 1) return
     setCurrentPage(currentPage - 1)
   }
-  if (!core) return null
+
+  if (!core || !lookup) return null
 
   return (
     <>

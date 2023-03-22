@@ -1,7 +1,7 @@
 import { SpanSection, SpanTitle } from 'components/index'
 
-function PrintCore ({ core }) {
-  if (!core) return null
+function PrintCore ({ core, lookup }) {
+  if (!core || !lookup) return null
 
   return (
     <>
