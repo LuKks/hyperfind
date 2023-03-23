@@ -68,9 +68,8 @@ function App () {
   return (
     <div className='custom-body body-dark'>
       <Container>
-        <br />
 
-        <Row style={{ justifyContent: 'center' }}>
+        <Row className='custom-row' style={{ justifyContent: 'center' }}>
           <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
             <img src={Logo} alt='Hypercore Explorer Logo' width={70} />
           </Col>
@@ -81,31 +80,19 @@ function App () {
             </h1>
           </Col>
 
-          <br />
-          <br />
-
-          <Col xs={8}>
+          <Col className='custom-col' xs={12} md={10} lg={8}>
             <CustomInput type='text' placeholder='Find core by key' onChange={onsearchchange} value={search} />
           </Col>
 
-          <br />
-          <br />
-
-          <Col xs={8}>
+          <Col className='custom-col' xs={12} md={10} lg={8}>
             <CustomInput type='password' placeholder='Encryption key (optional)' onChange={onencryptionkey} value={encryptionKey} />
           </Col>
 
-          <br />
-          <br />
-          <br />
-
-          <Col xs={8} style={{ marginTop: '10px' }}>
+          <Col className='custom-col' xs={12} md={10} lg={8}>
             <PrintCore core={core} lookup={lookup} />
             <BlockPages core={core} lookup={lookup} coreAppend={coreAppend} />
           </Col>
         </Row>
-
-        <br />
       </Container>
     </div>
   )

@@ -69,7 +69,6 @@ function BlockPages ({ core, lookup, coreAppend }) {
   return (
     <>
       <SpanTitle>Blocks</SpanTitle>
-      <br />
 
       {blocks.length > 0
         ? (
@@ -77,7 +76,6 @@ function BlockPages ({ core, lookup, coreAppend }) {
               return (
                 <div key={'block-' + block.index}>
                   <span className='span-block-section'>#{block.index}</span>&nbsp;<span>{block.value}</span>
-                  <br />
                 </div>
               )
             }))
@@ -88,7 +86,6 @@ function BlockPages ({ core, lookup, coreAppend }) {
         <Button onClick={onNextPage} style={{ marginLeft: '2px', marginRight: '2px', borderRadius: 0, background: '#2e3344' }}>Next&#8250;</Button>
       </div>
 
-      <br />
     </>
   )
 }
