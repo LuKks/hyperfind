@@ -46,8 +46,21 @@ body {
   color: rgb(119, 119, 119);
 }
 
+.custom-body .custom-col {
+  margin-bottom: 15px;
+}
+
+.custom-body .custom-row {
+  padding :20px 0 40px 0;
+}
+
 .custom-body span {
   overflow-wrap: anywhere;
+}
+
+.custom-body .print-core-section {
+  margin-bottom: 20px;
+  margin-top: 5px;
 }
 
 .main-container {
@@ -70,11 +83,17 @@ body {
 
 .body-dark .span-title {
   color: #8957e5;
+  display: inline-block
 }
 
 .body-dark .span-section {
   /* color: #3fb950 */
   color: #68ff00;
+  display: block;
+}
+
+.body-dark .span-section span {
+  color: white
 }
 
 .body-dark .span-block-section {
