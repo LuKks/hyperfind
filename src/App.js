@@ -93,7 +93,11 @@ function App () {
           <br />
 
           {lookup && (
-            <Core storage={RAM} coreKey={lookup} encryptionKey={encryptionKey}>
+            <Core
+              storage={RAM}
+              publicKey={lookup}
+              encryptionKey={encryptionKey}
+            >
               <LookupResult />
             </Core>
           )}
