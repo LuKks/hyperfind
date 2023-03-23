@@ -86,7 +86,6 @@ function BlockPages ({ core, lookup, coreAppend }) {
         <Button onClick={onNextPage} style={{ marginLeft: '2px', marginRight: '2px', borderRadius: 0, background: '#2e3344' }}>Next&#8250;</Button>
       </div>
 
-
     </>
   )
 }
