@@ -80,15 +80,15 @@ function App () {
             </h1>
           </Col>
 
-          <Col className='custom-col' xs={12} lg={8}>
+          <Col className='custom-col' xs={12} md={10} lg={8}>
             <CustomInput type='text' placeholder='Find core by key' onChange={onsearchchange} value={search} />
           </Col>
 
-          <Col className='custom-col' xs={12} lg={8}>
+          <Col className='custom-col' xs={12} md={10} lg={8}>
             <CustomInput type='password' placeholder='Encryption key (optional)' onChange={onencryptionkey} value={encryptionKey} />
           </Col>
 
-          <Col className='custom-col' xs={12} lg={8}>
+          <Col className='custom-col' xs={12} md={10} lg={8}>
             <PrintCore core={core} lookup={lookup} />
             <BlockPages core={core} lookup={lookup} coreAppend={coreAppend} />
           </Col>
