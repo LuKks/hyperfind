@@ -1,19 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import b4a from 'b4a'
 
-function useEncryptionKey (encryptionKeyValue, setCoreOptions) {
-  const [encryptionKey, setEncryptionKey] = useState(encryptionKeyValue)
+export const useEncryptionKey = defaultValue => {
+  const [value, setValue] = useState(defaultValue || '')
+  const key = value && value.length === 64 ? b4a.from(value, 'hex') : null
 
-  useEffect(() => {
-    if (!encryptionKey || encryptionKey.length !== 64) {
-      setCoreOptions(prev => ({ ...prev, encryptionKey: null }))
-      return
-    }
-    // + z32
-    setCoreOptions(prev => ({ ...prev, encryptionKey: b4a.from(encryptionKey, 'hex') }))
-  }, [encryptionKey])
-
-  return [encryptionKey, setEncryptionKey]
+  return { value, setValue, key }
 }
-
-export default useEncryptionKey

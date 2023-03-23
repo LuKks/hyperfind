@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
+import { useCore } from 'use-hyper'
 import { Button } from 'reactstrap'
 import { SpanTitle } from 'components'
+import { useLookup } from 'hooks'
 import b4a from 'b4a'
 
-function BlockPages ({ core, lookup, coreAppend }) {
+function BlockPages () {
+  const { core } = useCore()
+  const { lookup } = useLookup()
   const [blocks, setBlocks] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [blockPerPage] = useState(10)
@@ -13,18 +17,15 @@ function BlockPages ({ core, lookup, coreAppend }) {
   const indexOfFirstBlock = indexOfLastBlock - blockPerPage
 
   useEffect(() => {
-    if (!lookup || core === null) {
-      setBlocks([])
-      return
-    }
-
     setBlocks([])
-
+    if (!lookup || core === null) return
     let cleanup = false
 
-    main()
+    update()
 
-    async function main () {
+    core.on('append', update)
+
+    async function update () {
       try {
         setMaxPages(Math.ceil(core.length / blockPerPage))
 
@@ -40,7 +41,7 @@ function BlockPages ({ core, lookup, coreAppend }) {
           if (!value) break
 
           const block = { index: i, value: b4a.toString(value) }
-          setBlocks(prev => first ? [block] : [...prev, block])
+          setBlocks(prev => (first ? [block] : [...prev, block]))
         }
 
         return
@@ -51,8 +52,9 @@ function BlockPages ({ core, lookup, coreAppend }) {
 
     return () => {
       cleanup = true
+      core.off('append', update)
     }
-  }, [lookup, core, currentPage, coreAppend])
+  }, [lookup, core, currentPage])
 
   function onNextPage () {
     if (currentPage >= maxPages) return
@@ -66,26 +68,44 @@ function BlockPages ({ core, lookup, coreAppend }) {
 
   if (!core || !lookup) return null
 
+  const renderBlock = block => (
+    <div key={'block-' + block.index}>
+      <span className='span-block-section'>#{block.index}</span>&nbsp;
+      <span>{block.value}</span>
+      <br />
+    </div>
+  )
+
   return (
     <>
       <SpanTitle>Blocks</SpanTitle>
       <br />
 
-      {blocks.length > 0
-        ? (
-            blocks.map(block => {
-              return (
-                <div key={'block-' + block.index}>
-                  <span className='span-block-section'>#{block.index}</span>&nbsp;<span>{block.value}</span>
-                  <br />
-                </div>
-              )
-            }))
-        : (<div>Loading...</div>)}
+      {blocks.length > 0 ? blocks.map(renderBlock) : <div>Loading...</div>}
 
       <div style={{ marginTop: '10px' }}>
-        <Button onClick={onPrevPage} style={{ marginLeft: '2px', marginRight: '2px', borderRadius: 0, background: '#2e3344' }}>&#8249;Prev</Button>
-        <Button onClick={onNextPage} style={{ marginLeft: '2px', marginRight: '2px', borderRadius: 0, background: '#2e3344' }}>Next&#8250;</Button>
+        <Button
+          onClick={onPrevPage}
+          style={{
+            marginLeft: '2px',
+            marginRight: '2px',
+            borderRadius: 0,
+            background: '#2e3344'
+          }}
+        >
+          &#8249;Prev
+        </Button>
+        <Button
+          onClick={onNextPage}
+          style={{
+            marginLeft: '2px',
+            marginRight: '2px',
+            borderRadius: 0,
+            background: '#2e3344'
+          }}
+        >
+          Next&#8250;
+        </Button>
       </div>
 
       <br />

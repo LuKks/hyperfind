@@ -1,4 +1,2 @@
-import useLookup from 'hooks/useLookup'
-import useEncryptionKey from 'hooks/useEncryptionKey'
-
-export { useLookup, useEncryptionKey }
+export * from 'hooks/useLookup'
+export * from 'hooks/useEncryptionKey'
