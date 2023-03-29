@@ -79,7 +79,6 @@ function BlockPages () {
   return (
     <>
       <SpanTitle>Blocks</SpanTitle>
-      <br />
 
       {blocks.length > 0 ? blocks.map(renderBlock) : <div>Loading...</div>}
 
@@ -108,7 +107,6 @@ function BlockPages () {
         </Button>
       </div>
 
-      <br />
     </>
   )
 }

@@ -64,9 +64,8 @@ function App () {
   return (
     <div className='custom-body body-dark'>
       <Container>
-        <br />
 
-        <Row style={{ justifyContent: 'center' }}>
+        <Row className='custom-row' style={{ justifyContent: 'center' }}>
           <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
             <img src={Logo} alt='Hypercore Explorer Logo' width={70} />
           </Col>
@@ -82,7 +81,7 @@ function App () {
               Hypercore Explorer
             </h1>
           </Col>
-
+         
           <br />
           <br />
 
@@ -102,8 +101,6 @@ function App () {
             </Core>
           )}
         </Row>
-
-        <br />
       </Container>
     </div>
   )
