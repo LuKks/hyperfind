@@ -24,7 +24,6 @@ function BlockPages () {
 
     let cleanup = false
 
-    console.log('block pages')
     main()
 
     async function main () {
