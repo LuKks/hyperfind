@@ -109,7 +109,7 @@ function App () {
 
 export default () => {
   return (
-    <DHT>
+    <DHT> {/* eslint-disable-line react/jsx-pascal-case */}
       <Swarm>
         <LookupProvider>
           <App />
