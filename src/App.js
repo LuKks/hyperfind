@@ -82,7 +82,7 @@ function App () {
               Hypercore Explorer
             </h1>
           </Col>
-         
+
           <br />
           <br />
 
