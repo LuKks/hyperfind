@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useCore } from 'use-hyper'
+import { useCore } from 'use-hyper/core'
 import { Button } from 'reactstrap'
 import { SpanTitle } from 'components'
 import { useLookup } from 'hooks'

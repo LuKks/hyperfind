@@ -4,11 +4,12 @@ import RAM from 'random-access-memory'
 import { Container, Row, Col } from 'reactstrap'
 import { BlockPages, PrintCore, CustomInput } from 'components'
 import { LookupProvider, useLookup } from 'hooks'
-import { DHT, Swarm, Core, useCore, useReplicate } from 'use-hyper'
+import { Core, useCore } from 'use-hyper/core'
+import { DHT } from 'use-hyper/dht'
+import { Swarm, useReplicate } from 'use-hyper/swarm'
 
 const LookupForm = () => {
-  const { searchValue, setSearchValue, encryptionValue, setEncryptionValue } =
-    useLookup()
+  const { searchValue, setSearchValue, encryptionValue, setEncryptionValue } = useLookup()
 
   const onSearch = e => {
     setSearchValue(e.target.value)
@@ -48,7 +49,7 @@ const LookupResult = () => {
   const { core } = useCore()
   const { lookup } = useLookup()
 
-  useReplicate(core, !!lookup, [lookup])
+  useReplicate(lookup ? core : null, [lookup])
 
   return (
     <Col xs={8} style={{ marginTop: '10px' }}>

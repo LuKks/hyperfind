@@ -1,10 +1,11 @@
 import { SpanSection, SpanTitle } from 'components'
-import { useCoreWatch } from 'use-hyper'
+import { useCore, useCoreWatch } from 'use-hyper/core'
 import { useLookup } from 'hooks'
 
 function PrintCore () {
-  const { core } = useCoreWatch()
+  const { core } = useCore()
   const { lookup } = useLookup()
+  useCoreWatch()
 
   if (!core || !lookup) return null
 
