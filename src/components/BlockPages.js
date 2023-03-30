@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useCore } from 'use-hyper/core'
+import { useCore, useCoreWatch } from 'use-hyper/core'
 import { Button } from 'reactstrap'
 import { SpanTitle } from 'components'
 import { useLookup } from 'hooks'
@@ -12,20 +12,22 @@ function BlockPages () {
   const [currentPage, setCurrentPage] = useState(1)
   const [blockPerPage] = useState(10)
   const [maxPages, setMaxPages] = useState(0)
+  const { onwatch: onappend } = useCoreWatch(['append'])
 
   const indexOfLastBlock = currentPage * blockPerPage
   const indexOfFirstBlock = indexOfLastBlock - blockPerPage
 
   useEffect(() => {
     setBlocks([])
+
     if (!lookup || core === null) return
+
     let cleanup = false
 
-    update()
+    console.log('block pages')
+    main()
 
-    core.on('append', update)
-
-    async function update () {
+    async function main () {
       try {
         setMaxPages(Math.ceil(core.length / blockPerPage))
 
@@ -52,9 +54,8 @@ function BlockPages () {
 
     return () => {
       cleanup = true
-      core.off('append', update)
     }
-  }, [lookup, core, currentPage])
+  }, [lookup, core, currentPage, onappend])
 
   function onNextPage () {
     if (currentPage >= maxPages) return
