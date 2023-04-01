@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 174 229">
   <style>
     .logo { 
-      fill: black;
-      stroke: white;
+      fill: white;
+      stroke: black;
     }
     @media (prefers-color-scheme: dark) {
       .logo { 

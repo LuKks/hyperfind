@@ -1,4 +1,4 @@
-import Logo from 'images/196x196.png'
+import Logo from 'images/196x196.svg'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import RAM from 'random-access-memory'
 import { Container, Row, Col } from 'reactstrap'
@@ -7,7 +7,7 @@ import { LookupProvider, useLookup } from 'hooks'
 import { Core, useCore } from 'use-hyper/core'
 import { DHT } from 'use-hyper/dht'
 import { Swarm, useReplicate } from 'use-hyper/swarm'
-import {  useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 const LookupForm = () => {
   const { searchValue, setSearchValue, encryptionValue, setEncryptionValue } = useLookup()
