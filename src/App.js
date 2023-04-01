@@ -113,7 +113,6 @@ export default () => {
 
   if (!coreKey) coreKey = ''
   if (!(coreKey.length === 52 || coreKey.length === 64)) coreKey = ''
-  debugger
   return (
     <DHT> {/* eslint-disable-line react/jsx-pascal-case */}
       <Swarm>
