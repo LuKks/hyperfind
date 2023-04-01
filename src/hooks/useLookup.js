@@ -6,22 +6,23 @@ import { useNavigate } from 'react-router-dom'
 
 const LookupContext = createContext()
 
-export const LookupProvider = ({ children, defaultSeach }) => {
+export const LookupProvider = ({ children, defaultSearch }) => {
   const [lookup, setLookup] = useState(null)
-  const [search, setSearch] = useState(defaultSeach || '')
+  const [search, setSearch] = useState(defaultSearch || '')
   const encryption = useEncryptionKey()
   const navigate = useNavigate()
   useEffect(() => {
     // + use hypercore-id-encoding
-    navigate(search, { replace: true })
-
+    navigate('', { replace: true })
     if (search.length === 52) {
       try {
         setLookup(z32.decode(search))
+        navigate(search, { replace: true })
         return
       } catch {}
     } else if (search.length === 64) {
       setLookup(b4a.from(search, 'hex'))
+      navigate(search, { replace: true })
       return
     }
 

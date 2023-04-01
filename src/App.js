@@ -109,11 +109,15 @@ function App () {
 }
 
 export default () => {
-  const { coreKey } = useParams()
+  let { coreKey } = useParams()
+
+  if (!coreKey) coreKey = ''
+  if (!(coreKey.length === 52 || coreKey.length === 64)) coreKey = ''
+  debugger
   return (
     <DHT> {/* eslint-disable-line react/jsx-pascal-case */}
       <Swarm>
-        <LookupProvider defaultSeach={coreKey} >
+        <LookupProvider defaultSearch={coreKey} >
           <App />
         </LookupProvider>
       </Swarm>
