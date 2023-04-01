@@ -7,6 +7,7 @@ import { LookupProvider, useLookup } from 'hooks'
 import { Core, useCore } from 'use-hyper/core'
 import { DHT } from 'use-hyper/dht'
 import { Swarm, useReplicate } from 'use-hyper/swarm'
+import {  useParams } from 'react-router-dom'
 
 const LookupForm = () => {
   const { searchValue, setSearchValue, encryptionValue, setEncryptionValue } = useLookup()
@@ -108,10 +109,11 @@ function App () {
 }
 
 export default () => {
+  const { coreKey } = useParams()
   return (
     <DHT> {/* eslint-disable-line react/jsx-pascal-case */}
       <Swarm>
-        <LookupProvider>
+        <LookupProvider defaultSeach={coreKey} >
           <App />
         </LookupProvider>
       </Swarm>
