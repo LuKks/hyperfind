@@ -79,6 +79,7 @@ function BlockPages ({page}) {
   return (
     <>
       <SpanTitle>Blocks</SpanTitle>
+
       <section className='button-section'>
         <Button onClick={onPrevPage} className='custom-button prev-button'>
           &#8249;Prev
@@ -90,9 +91,6 @@ function BlockPages ({page}) {
       </section>
 
       {blocks.length > 0 ? blocks.map(renderBlock) : <div>Loading...</div>}
-
-      
-
     </>
   )
 }
