@@ -53,7 +53,7 @@ const LookupResult = () => {
   useReplicate(lookup ? core : null, [lookup])
 
   return (
-    <Col xs={8} style={{ marginTop: '10px' }}>
+    <Col xs={8} className='mt-1'>
       <PrintCore />
       <BlockPages />
     </Col>
@@ -67,19 +67,13 @@ function App () {
     <div className='custom-body body-dark'>
       <Container>
 
-        <Row className='custom-row' style={{ justifyContent: 'center' }}>
-          <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Row className='custom-row'>
+          <Col xs={12} className='custom-col'>
             <img src={Logo} alt='Hypercore Explorer Logo' width={70} />
           </Col>
 
-          <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <h1
-              style={{
-                fontSize: '2em,',
-                marginBottom: '20px',
-                marginTop: '20px'
-              }}
-            >
+          <Col xs={12} className='custom-col'>
+            <h1 className='site-title'>
               Hypercore Explorer
             </h1>
           </Col>

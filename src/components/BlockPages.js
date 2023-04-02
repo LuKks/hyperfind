@@ -82,31 +82,15 @@ function BlockPages ({page}) {
 
       {blocks.length > 0 ? blocks.map(renderBlock) : <div>Loading...</div>}
 
-      <div style={{ marginTop: '10px' }}>
-        <Button
-          onClick={onPrevPage}
-          style={{
-            marginLeft: '2px',
-            marginRight: '2px',
-            borderRadius: 0,
-            background: '#2e3344'
-          }}
-        >
+      <section className='button-section'>
+        <Button onClick={onPrevPage} className='custom-button'>
           &#8249;Prev
         </Button>
         <span>{currentPage}/{maxPages}</span>
-        <Button
-          onClick={onNextPage}
-          style={{
-            marginLeft: '2px',
-            marginRight: '2px',
-            borderRadius: 0,
-            background: '#2e3344'
-          }}
-        >
+        <Button onClick={onNextPage} className='custom-button'>
           Next&#8250;
         </Button>
-      </div>
+      </section>
 
     </>
   )

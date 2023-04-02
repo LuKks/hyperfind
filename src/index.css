@@ -46,12 +46,21 @@ body {
   color: rgb(119, 119, 119);
 }
 
+.custom-body .custom-button {
+  margin-left: 2px;
+  margin-right: 2px;
+  border-radius: 0;
+  background: #2e3344;
+}
+
 .custom-body .custom-col {
-  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
 }
 
 .custom-body .custom-row {
   padding :20px 0 40px 0;
+  justify-content: center;
 }
 
 .custom-body span {
@@ -61,6 +70,20 @@ body {
 .custom-body .print-core-section {
   margin-bottom: 20px;
   margin-top: 5px;
+}
+
+#core-id {
+  color: #58a6ff;
+}
+
+.site-title {
+  font-size: 2em;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.button-section {
+  margin-top: 10px;
 }
 
 .main-container {
