@@ -32,13 +32,13 @@ body {
 
 .custom-body .custom-input {
   border: 1px solid black;
-  color: white;
+  color: inherit;
   border-radius: 0;
   background-color: #2e3344;
 }
 
 .custom-body .custom-input:focus {
-  color: white;
+  color: inherit;
   background-color: #2e3344;
 }
 

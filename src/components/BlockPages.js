@@ -5,16 +5,17 @@ import { SpanTitle } from 'components'
 import { useLookup } from 'hooks'
 import b4a from 'b4a'
 
-function BlockPages ({page}) {
+function BlockPages ({ defaultPage }) {
   const { core } = useCore()
   const { lookup } = useLookup()
   const [blocks, setBlocks] = useState([])
-  const [currentPage, setCurrentPage] = useState(page || 1)
+  const [currentPage, setCurrentPage] = usePage(defaultPage || 1)
   const [blockPerPage] = useState(10)
   const [maxPages, setMaxPages] = useState(0)
   const { onwatch: onappend } = useCoreWatch(['append'])
 
-  const indexOfLastBlock = currentPage * blockPerPage
+  let indexOfLastBlock = blockPerPage
+  if (currentPage > 1) indexOfLastBlock = currentPage * blockPerPage
   const indexOfFirstBlock = indexOfLastBlock - blockPerPage
 
   useEffect(() => {
@@ -95,4 +96,11 @@ function BlockPages ({page}) {
   )
 }
 
+function usePage(defaultPage) {
+  const [page, setPage] = useState(defaultPage || 1)
+  if (page < 0) setPage(0)
+  return [page, setPage]
+}
+
 export default BlockPages
+export { usePage }
