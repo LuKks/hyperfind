@@ -7,7 +7,9 @@ import App from 'App'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/:coreKey?'element={<App />} />
+    <Route path='/' element={<App />}>
+      <Route path='/:coreKey?'element={<App />} />
+    </Route>
   )
 )
 
