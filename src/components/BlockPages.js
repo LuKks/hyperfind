@@ -5,11 +5,11 @@ import { SpanTitle } from 'components'
 import { useLookup } from 'hooks'
 import b4a from 'b4a'
 
-function BlockPages () {
+function BlockPages ({page}) {
   const { core } = useCore()
   const { lookup } = useLookup()
   const [blocks, setBlocks] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(page || 1)
   const [blockPerPage] = useState(10)
   const [maxPages, setMaxPages] = useState(0)
   const { onwatch: onappend } = useCoreWatch(['append'])
@@ -94,6 +94,7 @@ function BlockPages () {
         >
           &#8249;Prev
         </Button>
+        <span>{currentPage}/{maxPages}</span>
         <Button
           onClick={onNextPage}
           style={{
