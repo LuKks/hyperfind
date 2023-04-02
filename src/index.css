@@ -47,11 +47,20 @@ body {
 }
 
 .custom-body .custom-button {
-  margin-left: 2px;
-  margin-right: 2px;
   border-radius: 0;
   background: #2e3344;
+  padding: 0 5px 2px 5px;
 }
+
+.prev-button {
+  margin-right: 10px !important;
+
+}
+
+.next-button {
+  margin-left: 10px !important;
+}
+
 
 .custom-body .custom-col {
   display: flex;

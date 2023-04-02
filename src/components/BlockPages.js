@@ -83,11 +83,11 @@ function BlockPages ({page}) {
       {blocks.length > 0 ? blocks.map(renderBlock) : <div>Loading...</div>}
 
       <section className='button-section'>
-        <Button onClick={onPrevPage} className='custom-button'>
+        <Button onClick={onPrevPage} className='custom-button prev-button'>
           &#8249;Prev
         </Button>
         <span>{currentPage}/{maxPages}</span>
-        <Button onClick={onNextPage} className='custom-button'>
+        <Button onClick={onNextPage} className='custom-button next-button'>
           Next&#8250;
         </Button>
       </section>
