@@ -8,6 +8,7 @@ import { Core, useCore } from 'use-hyper/core'
 import { DHT } from 'use-hyper/dht'
 import { Swarm, useReplicate } from 'use-hyper/swarm'
 import { useParams } from 'react-router-dom'
+import PrintSwarm from 'components/PrintSwarm'
 
 const LookupForm = () => {
   const { searchValue, setSearchValue, encryptionValue, setEncryptionValue } = useLookup()
@@ -54,6 +55,7 @@ const LookupResult = () => {
 
   return (
     <Col xs={8} className='mt-1'>
+      <PrintSwarm />
       <PrintCore />
       <BlockPages />
     </Col>
