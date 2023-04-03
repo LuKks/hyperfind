@@ -11,8 +11,6 @@ export default function PrintSwarm() {
 
   if (!core || !swarm ||!lookup) return
 
-  console.log(swarm);
-
   return (
     <section>
       <SpanTitle>Swarm</SpanTitle>
