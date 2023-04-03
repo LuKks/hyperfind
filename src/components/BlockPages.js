@@ -3,12 +3,13 @@ import { useCore, useCoreWatch } from 'use-hyper/core'
 import { Button } from 'reactstrap'
 import { SpanTitle } from 'components'
 import { useLookup } from 'hooks'
+import { isHyperbee } from 'hyperbee'
 import b4a from 'b4a'
 
 function BlockPages ({ defaultPage }) {
   const { core } = useCore()
   const { lookup } = useLookup()
-  const [blocks, setBlocks] = useState([])
+  const [blocks, setBlocks] = useState(null)
   const [currentPage, setCurrentPage] = usePage(defaultPage || 1)
   const [blockPerPage] = useState(10)
   const [maxPages, setMaxPages] = useState(0)
@@ -19,7 +20,7 @@ function BlockPages ({ defaultPage }) {
   const indexOfFirstBlock = indexOfLastBlock - blockPerPage
 
   useEffect(() => {
-    setBlocks([])
+    setBlocks(null)
 
     if (!lookup || core === null) return
 
@@ -31,10 +32,26 @@ function BlockPages ({ defaultPage }) {
       try {
         setMaxPages(Math.ceil(core.length / blockPerPage))
 
-        const max = Math.min(indexOfFirstBlock + blockPerPage, core.length)
+        const max = Math.min(indexOfLastBlock, core.length)
+
+        async function coreType(coreObj, index){
+          if (!(await isHyperbee(coreObj))) return 'Hypercore'
+
+          const value = b4a.toString(await core.get(index, { timeout: 15000 }))
+          if (value.includes('hyperbee')) return 'Hyperbee' 
+
+          return 'Hyperdrive'
+        }
+        
+        if (indexOfFirstBlock === 0) {
+          const typeOfCore = await coreType(core, indexOfFirstBlock)
+          const block = { index: 0, value: typeOfCore }
+          setBlocks([block])
+        }
 
         for (let i = indexOfFirstBlock; i < max; i++) {
           // + prefetch next
+          if (i === 0) continue
           const value = await core.get(i, { timeout: 15000 })
           if (cleanup) return
 
@@ -49,7 +66,7 @@ function BlockPages ({ defaultPage }) {
         return
       } catch {}
 
-      setBlocks([])
+      setBlocks(null)
     }
 
     return () => {
@@ -91,7 +108,7 @@ function BlockPages ({ defaultPage }) {
         </Button>
       </section>
 
-      {blocks.length > 0 ? blocks.map(renderBlock) : <div>Loading...</div>}
+      {blocks ? blocks.map(renderBlock) : <div>Loading...</div>}
     </>
   )
 }
