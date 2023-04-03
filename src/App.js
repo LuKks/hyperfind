@@ -112,7 +112,7 @@ export default () => {
   return (
     <DHT> {/* eslint-disable-line react/jsx-pascal-case */}
       <Swarm>
-        <LookupProvider defaultSearch={coreKey} >
+        <LookupProvider defaultSearch={coreKey}>
           <App />
         </LookupProvider>
       </Swarm>

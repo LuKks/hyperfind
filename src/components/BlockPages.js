@@ -34,15 +34,15 @@ function BlockPages ({ defaultPage }) {
 
         const max = Math.min(indexOfLastBlock, core.length)
 
-        async function coreType(coreObj, index){
+        async function coreType (coreObj, index) {
           if (!(await isHyperbee(coreObj))) return 'Hypercore'
 
           const value = b4a.toString(await core.get(index, { timeout: 15000 }))
-          if (value.includes('hyperbee')) return 'Hyperbee' 
+          if (value.includes('hyperbee')) return 'Hyperbee'
 
           return 'Hyperdrive'
         }
-        
+
         if (indexOfFirstBlock === 0) {
           const typeOfCore = await coreType(core, indexOfFirstBlock)
           const block = { index: 0, value: typeOfCore }
@@ -113,7 +113,7 @@ function BlockPages ({ defaultPage }) {
   )
 }
 
-function usePage(defaultPage) {
+function usePage (defaultPage) {
   const [page, setPage] = useState(defaultPage || 1)
   if (page < 0) setPage(0)
   return [page, setPage]

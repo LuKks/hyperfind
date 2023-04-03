@@ -1,15 +1,15 @@
-import { SpanSection } from "components";
-import { SpanTitle } from "components";
-import { useCore  } from "use-hyper/core";
-import { useSwarm } from "use-hyper/swarm";
-import { useLookup } from "hooks/useLookup";
+import { SpanSection, SpanTitle } from 'components'
 
-export default function PrintSwarm() {
+import { useCore } from 'use-hyper/core'
+import { useSwarm } from 'use-hyper/swarm'
+import { useLookup } from 'hooks/useLookup'
+
+export default function PrintSwarm () {
   const { swarm } = useSwarm()
   const lookup = useLookup()
   const core = useCore()
 
-  if (!core || !swarm ||!lookup) return
+  if (!core || !swarm || !lookup) return
 
   return (
     <section>
